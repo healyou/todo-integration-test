@@ -1,0 +1,5 @@
+pytest==7.1.2
+python-dotenv==0.20.0
+testcontainers==3.6.1
+PyYAML==6.0
+selenium==4.4.3

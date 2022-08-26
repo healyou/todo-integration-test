@@ -1,0 +1,34 @@
+version: 1
+formatters:
+  default:
+    format: '%(asctime)s - %(process)s - {%(filename)s:%(lineno)d} %(levelname)s - %(message)s'
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: default
+    stream: ext://sys.stdout
+  file:
+    class: logging.FileHandler
+    level: DEBUG
+    formatter: default
+    filename: "{log_path}/integration-test.log"
+    encoding: utf8
+  dockerFile:
+    class: logging.FileHandler
+    level: DEBUG
+    formatter: default
+    filename: "{log_path}/integration-test-docker.log"
+    encoding: utf8
+loggers:
+  root:
+    level: DEBUG
+    handlers: [console, file]
+  fileLogger:
+    level: DEBUG
+    handlers: [console, file]
+    propagate: no
+  dockerLogger:
+    level: DEBUG
+    handlers: [dockerFile, console]
+    propagate: no

@@ -1,0 +1,6 @@
+/venv/
+.pytest_cache/
+.idea/
+db/redis/data
+log/**/*.log
+webdriver/chromedriver.exe
