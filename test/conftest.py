@@ -1,12 +1,11 @@
-import logging
 import os
-from time import sleep
 
 import pytest
 from selenium import webdriver
 
-from test.docker.docker_compose import TodoAppDockerCompose, get_web_app_host
 from test import logger, dockerLogger
+from test.actions.web_driver_actions import WebDriverActions
+from test.docker.docker_compose import TodoAppDockerCompose, get_web_app_host
 from test.utils.common_utils import get_project_root_str
 
 
@@ -30,6 +29,11 @@ def web_driver():
 
     logger.debug("teardown webdriver")
     driver.quit()
+
+
+@pytest.fixture
+def web_driver_actions(web_driver):
+    return WebDriverActions(web_driver)
 
 
 def setup_chrome_web_driver():
