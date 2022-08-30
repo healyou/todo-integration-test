@@ -87,7 +87,6 @@ class WebDriverActions:
     def logout(self):
         self.open_base_url()
 
-        # self.web_driver.find_element(By.CSS_SELECTOR, ".col").click()
         # Открытие меню пользователя
         self.web_driver.find_element(By.CSS_SELECTOR, ".mx-1").click()
         # Выход
@@ -156,8 +155,7 @@ class WebDriverActions:
         # Должна быть видна заметка с текстом
         WebDriverWait(self.web_driver, 10) \
             .until(expected_conditions
-                   .visibility_of_element_located((By.XPATH, "//p[contains(text(),'note title1_2s')]")))
-                   # .visibility_of_element_located((By.XPATH, "//p[contains(text(),'" + note_title + "')]")))
+                   .visibility_of_element_located((By.XPATH, "//p[contains(text(),'" + note_title[:6] + "')]")))
 
         # Создаём темповый файл
         temp_file_descriptor, temp_file_path = tempfile.mkstemp(suffix='.tmp')
@@ -204,8 +202,7 @@ class WebDriverActions:
             # Должна быть видна заметка с новым текстом
             WebDriverWait(self.web_driver, 10) \
                 .until(expected_conditions
-                       .visibility_of_element_located((By.XPATH, "//p[contains(text(),'note title1_2s')]")))
-                       # .visibility_of_element_located((By.XPATH, "//p[contains(text(),'" + new_note_title + "')]")))
+                       .visibility_of_element_located((By.XPATH, "//p[contains(text(),'" + new_note_title[:6] + "')]")))
 
         finally:
             os.unlink(temp_file_path)

@@ -1,14 +1,280 @@
-version: '3.2'
+version: '3.8'
 
 services:
 
+  # java users app
+  postgres-db:
+    image: postgres:14.1-alpine3.15
+    container_name: postgres-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=users
+#    ports:
+#      - 5432:5432
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+
+  liquibase:
+    image: users-app-liquibase:latest
+    container_name: liquibase
+    command: --defaultsFile=/liquibase/changelog/liquibase.docker.properties --contexts="dev" update
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+
+  pgadmin:
+    image: dpage/pgadmin4:6.2
+    container_name: pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=postgres@pgadmin.org
+      - PGADMIN_DEFAULT_PASSWORD=postgres
+      - PGADMIN_LISTEN_PORT=80
+#    ports:
+#      - 8089:80
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+      liquibase:
+        condition: service_completed_successfully
+
+  users-app:
+    image: users-app:v1
+    container_name: users-app
+#    ports:
+#      - 8082:8082
+    environment:
+      - spring.profiles.active=docker
+    volumes:
+      - ./log:/var/log/users-service
+#    healthcheck:
+#      test: "curl --fail --silent localhost:8082/actuator/health | grep UP || exit 1"
+#      interval: 10s
+#      timeout: 5s
+#      retries: 30
+#      start_period: 15s
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+      liquibase:
+        condition: service_completed_successfully
+
+  # auth python app
+  redis:
+    image: redis:6.2.6-alpine
+    container_name: auth-redis-db
+    command: redis-server --appendonly yes --appendfsync everysec --requirepass redis
+#    ports:
+#      - 6379:6379
+    healthcheck:
+      test: [ "CMD", "redis-cli","-a","redis","ping" ]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+      start_period: 5s
+
+  redis-commander:
+    container_name: redis-commander
+    image: rediscommander/redis-commander:redis-commander-210
+    environment:
+      - REDIS_PASSWORD=redis
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=0
+      - HTTP_USER=redis
+      - HTTP_PASSWORD=redis
+#    ports:
+#      - 8081:8081
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  auth-app:
+    pull_policy: build
+    image: auth-app:v1
+    container_name: auth-app
+    environment:
+      ENV: PROD
+#    ports:
+#      - 8887:8887
+    volumes:
+      - ./log:/usr/src/app/log
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  # go todo_app
+  mysql:
+    image: mysql:8.0.27
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password
+#    ports:
+#      - "3306:3306"
+    volumes:
+      - ../todo/db/mysql-initdb-d:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_USER: "mysql"
+      MYSQL_PASSWORD: "mysql"
+      MYSQL_DATABASE: "todo"
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost", '-u', 'mysql', '-pmysql']
+      timeout: 10s
+      retries: 6
+
+  flyway:
+    image: todo-app-flyway:latest
+    container_name: flyway
+#    restart: on-failure[:20]
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 5
+        delay: 20s
+    depends_on:
+      mysql:
+        condition: service_healthy
+    command: "-configFiles=/flyway/conf/flyway-dev.conf repair migrate"
+
+  nginx-basic-auth:
+    container_name: nginx-basic-auth
+    image: beevelop/nginx-basic-auth:v2021.02.1
+#    ports:
+#      - "8111:80"
+    environment:
+      # apr1 hash - $$ (экранирование знака $)
+      HTPASSWD: admin:$$apr1$$K3hIHvp9$$CGnOCuffpwYynXXLaB8Fm/
+      FORWARD_HOST: adminer
+      FORWARD_PORT: 8080
+    links:
+      - adminer
+    depends_on:
+      - adminer
+
+  adminer:
+    image: adminer:4.8.1-standalone
+    container_name: adminer
+    environment:
+      ADMINER_DESIGN: dracula
+      ADMINER_DEFAULT_SERVER: mysql
+    depends_on:
+      mysql:
+        condition: service_healthy
+      flyway:
+        condition: service_completed_successfully
+
+  minio:
+    image: minio/minio:RELEASE.2022-01-27T03-53-02Z
+    container_name: minio
+    command: "server /data --console-address ':9001'"
+#    ports:
+#      - "9000:9000"
+#      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: "minio"
+      MINIO_ROOT_PASSWORD: "miniopsw"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
+      interval: 10s
+      timeout: 10s
+      retries: 15
+
+  miniomc:
+    image: minio/mc:RELEASE.2022-01-29T01-03-27Z
+    container_name: miniomc
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc config host add myminio http://minio:9000 minio miniopsw;
+      /usr/bin/mc mb --ignore-existing myminio/todo-app-bucket;
+      exit 0;
+      "
+
+  todo-app:
+    image: todo-app:latest
+    container_name: todo-app
+    volumes:
+      - ./log:/src/log
+    environment:
+      APP_PROFILE_ACTIVE: "PROD"
+      MINIO_ENDPOINT: "minio:9000"
+      MINIO_ACCESS_KEY: "minio"
+      MINIO_SECRET_KEY: "miniopsw"
+      MY_SQL_DRIVER_NAME: "mysql"
+      MY_SQL_DATASOURCE_URL: "mysql:mysql@tcp(mysql:3306)/todo?parseTime=true"
+      LOG_FILE_PATH_WITH_NAME: "/src/log/todo_app.log"
+#    ports:
+#      - "8222:8222"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      flyway:
+        condition: service_completed_successfully
+      minio:
+        condition: service_healthy
+
+  # spring-boot graphql app
+  todo-graphql-app:
+    image: todo-graphql-app:v1
+    container_name: todo-graphql-app
+#    ports:
+#      - "8333:8333"
+    environment:
+      - spring.profiles.active=prod
+    volumes:
+      - ./log:/var/log/todo-graphql-service
+    healthcheck:
+      test: "curl --fail --silent localhost:8333/actuator/health | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 15
+      start_period: 15s
+    depends_on:
+      todo-app:
+        condition: service_started
+      users-app:
+        condition: service_started
+
+  # java gateway-app - маршрутизатор запросов web приложения
+  gateway-app:
+    image: gateway-app:v1
+    container_name: gateway-app
+    ports:
+      - "8080:8080"
+    environment:
+      - spring.profiles.active=prod
+      - SPRING_APPLICATION_JSON={"spring":{"cloud":{"gateway":{"globalcors":{"corsConfigurations":{"'[/**]'":{"allowedOrigins":"http://localhost:8083"}}}}}}}
+    volumes:
+      - ./log:/var/log/gateway-service
+    healthcheck:
+      test: "curl --fail --silent localhost:8080/actuator/health | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 15
+      start_period: 15s
+    depends_on:
+      todo-app:
+        condition: service_started
+      auth-app:
+        condition: service_started
+      users-app:
+        condition: service_started
+      todo-graphql-app:
+        condition: service_healthy
+
+  # vue web app
   todo-web-app:
-    image: todo-web-app-mock-postman:latest
+    image: todo-web-app:latest
     container_name: todo-web-app
-    restart: always
     ports:
       - "8083:80"
-    expose:
-      - "80"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://todo-web-app:8080"]
+      test: [ "CMD", "service", "nginx", "status" ]
+    depends_on:
+      gateway-app:
+        condition: service_healthy

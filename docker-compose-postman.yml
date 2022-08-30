@@ -1,0 +1,14 @@
+version: '3.2'
+
+services:
+
+  todo-web-app:
+    image: todo-web-app-mock-postman:latest
+    container_name: todo-web-app
+    restart: always
+    ports:
+      - "8083:80"
+    expose:
+      - "80"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://todo-web-app:8080"]

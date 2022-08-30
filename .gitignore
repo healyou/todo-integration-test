@@ -2,5 +2,5 @@
 .pytest_cache/
 .idea/
 db/redis/data
-log/**/*.log
+log/**/*.log**
 webdriver/chromedriver.exe
