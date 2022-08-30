@@ -35,7 +35,7 @@ class WebDriverActions:
         self.web_driver = web_driver
 
     def open_base_url(self):
-        self.web_driver.get("http://localhost:8083")
+        self.web_driver.get("http://localhost")
 
     def register_user(self, username: str, password: str):
         self.open_base_url()

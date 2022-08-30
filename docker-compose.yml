@@ -245,10 +245,10 @@ services:
     image: gateway-app:v1
     container_name: gateway-app
     ports:
-      - "8080:8080"
+      - "8083:8080"
     environment:
       - spring.profiles.active=prod
-      - SPRING_APPLICATION_JSON={"spring":{"cloud":{"gateway":{"globalcors":{"corsConfigurations":{"'[/**]'":{"allowedOrigins":"http://localhost:8083"}}}}}}}
+      - SPRING_APPLICATION_JSON={"spring":{"cloud":{"gateway":{"globalcors":{"corsConfigurations":{"'[/**]'":{"allowedOrigins":"http://localhost"}}}}}}}
     volumes:
       - ./log:/var/log/gateway-service
     healthcheck:
@@ -272,7 +272,7 @@ services:
     image: todo-web-app:latest
     container_name: todo-web-app
     ports:
-      - "8083:80"
+      - "80:80"
     healthcheck:
       test: [ "CMD", "service", "nginx", "status" ]
     depends_on:
