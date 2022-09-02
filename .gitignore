@@ -4,3 +4,5 @@
 db/redis/data
 log/**/*.log**
 webdriver/chromedriver.exe
+docker/volumes/**
+!docker/volumes/readme.txt

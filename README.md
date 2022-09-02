@@ -1,10 +1,24 @@
 # Запуск приложения
-python 3.10
+
+## Конфигурация
+1) При разработке использовался python 3.10
+2) Для запуска тестов необходим Docker engine release 19.03.0+ (Используется docker-compose форат 3.8)
+
+## Информация о файлах docker-compose
+1) docker-compose.yml - запускается в тестах, открыты только порты 80 (web) и 8083 (rest)
+2) docker-compose-dev.yml - для запуска докера в режиме разработки (открыты порты всех docker контейнеров, файловая 
+система мапится, чтобы бд сохраняли данные между запусками)
+3) docker-compose-prod.yml - для запуска в прод режиме (открыты порты баз данных и приложения для управления бд + 
+web 80 и rest 8083)
+4) docker-compose-postman.yml - используется для быстрой проверки тестов, но надо поднять postman mock сервис с файлом 
+'Mock todo-api-gateway.postman_collection.json" и собрать веб модуль с указанием адреса mock сервиса 'todo-web-app'
 
 ## Запуск интеграционных тестов
-1) Активировать виртуальное окружение:
-    'venv/Scripts/activate'
+1) Создать вирутальное окружение из корня проекта
+   'virtualenv --python C:\Path\To\Python\python.exe venv'
+1) Активировать виртуальное окружение из корня проекта:
+   'venv/Scripts/activate'
 2) Установить необходимые зависимости в venv:
-    'pip install -r requirements.txt'
-3) Запустить unit тесты:
-    'python -m pytest'
+   'pip install -r requirements.txt'
+3) Запустить интеграционные тесты из корня проекта:
+   'python pytest'

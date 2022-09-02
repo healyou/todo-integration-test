@@ -1,0 +1,799 @@
+{
+	"info": {
+		"_postman_id": "388a9fab-0b36-4b0e-a804-1dc9b66fc934",
+		"name": "Mock todo-api-gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3349442"
+	},
+	"item": [
+		{
+			"name": "todo-web-api/auth-api/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/todo-web-api/auth-api/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"todo-web-api",
+						"auth-api",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/todo-web-api/auth-api/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"todo-web-api",
+								"auth-api",
+								"login"
+							]
+						}
+					},
+					"code": 201,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlcl9pZCI6MSwicHJpdmlsZWdlcyI6WyJWSUVXX05PVEVfVkVSU0lPTl9ISVNUT1JZIiwiQ0hBTkdFX05PVEVfVkVSU0lPTiIsIkNSRUFURV9OT1RFIl0sImV4cCI6MTY1MjAyMzYyNH0._w7M4yW0mSmVhFa1LzxKE8Gi6ua8sztqNTvv8n-INFk\",\n    \"access_token_expired_time_utc\": \"05.08.2022 15:27:04 +0300\",\n    \"refresh_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlcl9pZCI6MSwicHJpdmlsZWdlcyI6WyJWSUVXX05PVEVfVkVSU0lPTl9ISVNUT1JZIiwiQ0hBTkdFX05PVEVfVkVSU0lPTiIsIkNSRUFURV9OT1RFIl0sInV1aWQiOiI3MThkNDBkYy04NGE5LTRlMDMtODU3MS0wODY1NDhjNjJiMzAiLCJleHAiOjE2NTIxMDgyMjR9.AJSdHFnpjl2VAmtiiEZVTghE7-wQZHl4aWiGSWKV7JA\"\n}"
+				}
+			]
+		},
+		{
+			"name": "todo-web-api/auth-api/refreshToken",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/todo-web-api/auth-api/refreshToken",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"todo-web-api",
+						"auth-api",
+						"refreshToken"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/todo-web-api/auth-api/refreshToken",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"todo-web-api",
+								"auth-api",
+								"refreshToken"
+							]
+						}
+					},
+					"code": 201,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlcl9pZCI6MSwicHJpdmlsZWdlcyI6WyJWSUVXX05PVEVfVkVSU0lPTl9ISVNUT1JZIiwiQ0hBTkdFX05PVEVfVkVSU0lPTiIsIkNSRUFURV9OT1RFIl0sImV4cCI6MTY1MjAyMzcwMX0.x84P-GqeDKzAFivDuM5IU5V2BhdV6H1Feyy5XGm4rAY\",\n    \"access_token_expired_time_utc\": \"05.08.2022 15:28:21 +0300\",\n    \"refresh_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlcl9pZCI6MSwicHJpdmlsZWdlcyI6WyJWSUVXX05PVEVfVkVSU0lPTl9ISVNUT1JZIiwiQ0hBTkdFX05PVEVfVkVSU0lPTiIsIkNSRUFURV9OT1RFIl0sInV1aWQiOiI5NzFhYWQ3NC01YjVhLTQ3MTQtOTA3OC0wYmM4OGQwODg2YmIiLCJleHAiOjE2NTIxMDgzMDF9.NbwbBKb2Oe9y37-EpuPeF0-Ki52t7Gd1ossOsyTa2r4\"\n}"
+				}
+			]
+		},
+		{
+			"name": "todo-web-api/auth-api/logout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/todo-web-api/auth-api/logout",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"todo-web-api",
+						"auth-api",
+						"logout"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/todo-web-api/auth-api/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"todo-web-api",
+								"auth-api",
+								"logout"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"message\": \"successful logout\"\n}"
+				}
+			]
+		},
+		{
+			"name": "todo-web-api/users-api/users/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/todo-web-api/users-api/users/register",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"todo-web-api",
+						"users-api",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/todo-web-api/users-api/users/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"todo-web-api",
+								"users-api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "true"
+				}
+			]
+		},
+		{
+			"name": "todo-web-api/notes-api/notes/getUserNotes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/todo-web-api/notes-api/notes/getUserNotes",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"todo-web-api",
+						"notes-api",
+						"notes",
+						"getUserNotes"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://4346340c-b680-413b-b41d-2680ef445b26.mock.pstmn.io/todo-web-api/notes-api/notes/getUserNotes",
+							"protocol": "https",
+							"host": [
+								"4346340c-b680-413b-b41d-2680ef445b26",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"todo-web-api",
+								"notes-api",
+								"notes",
+								"getUserNotes"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 2,\n        \"prev_note_version_id\": 1,\n        \"guid\": \"not guid1\",\n        \"version\": 1,\n        \"title\": \"Title заметки 1\",\n        \"text\": \"Text заметки 1\",\n        \"user_id\": 1,\n        \"create_date\": \"2022-05-03T21:39:07Z\",\n        \"deleted\": false,\n        \"archive\": false,\n        \"actual\": true,\n        \"note_files\": [\n            {\n                \"id\": 1,\n                \"note_id\": 2,\n                \"guid\": \"testGuid\",\n                \"data\": null,\n                \"filename\": \"filename\"\n            }\n        ]\n    },\n    {\n        \"id\": 3,\n        \"prev_note_version_id\": null,\n        \"guid\": \"not guid2\",\n        \"version\": 1,\n        \"title\": \"Title заметки 2\",\n        \"text\": \"Text заметки 2\",\n        \"user_id\": 1,\n        \"create_date\": \"2022-05-03T21:39:07Z\",\n        \"deleted\": false,\n        \"archive\": false,\n        \"actual\": true,\n        \"note_files\": [\n            {\n                \"id\": 1,\n                \"note_id\": 3,\n                \"guid\": \"testGuid\",\n                \"data\": null,\n                \"filename\": \"filename\"\n            }\n        ]\n    },\n    {\n        \"id\": 4,\n        \"prev_note_version_id\": null,\n        \"guid\": \"not guid3\",\n        \"version\": 1,\n        \"title\": \"Title заметки 3\",\n        \"text\": \"Text заметки 3\",\n        \"user_id\": 1,\n        \"create_date\": \"2022-05-03T21:39:07Z\",\n        \"deleted\": false,\n        \"archive\": false,\n        \"actual\": true,\n        \"note_files\": [\n            {\n                \"id\": 1,\n                \"note_id\": 4,\n                \"guid\": \"testGuid\",\n                \"data\": null,\n                \"filename\": \"filename\"\n            }\n        ]\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "todo-web-api/notes-api/notes/getActualNote",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-mock-match-request-headers",
+						"value": "guid",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{url}}/todo-web-api/notes-api/notes/getActualNote",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"todo-web-api",
+						"notes-api",
+						"notes",
+						"getActualNote"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Note 1",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "guid",
+									"value": "not guid1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://4346340c-b680-413b-b41d-2680ef445b26.mock.pstmn.io/todo-web-api/notes-api/notes/getActualNote",
+							"protocol": "https",
+							"host": [
+								"4346340c-b680-413b-b41d-2680ef445b26",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"todo-web-api",
+								"notes-api",
+								"notes",
+								"getActualNote"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"id\": 2,\n    \"prev_note_version_id\": 1,\n    \"guid\": \"not guid1\",\n    \"version\": 1,\n    \"title\": \"note title1\",\n    \"text\": \"note text1\",\n    \"user_id\": 1,\n    \"create_date\": \"2022-05-03T21:39:07Z\",\n    \"deleted\": false,\n    \"archive\": false,\n    \"actual\": true,\n    \"note_files\": null\n}"
+				},
+				{
+					"name": "Note 2",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "guid",
+									"value": "not guid2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://4346340c-b680-413b-b41d-2680ef445b26.mock.pstmn.io/todo-web-api/notes-api/notes/getActualNote",
+							"protocol": "https",
+							"host": [
+								"4346340c-b680-413b-b41d-2680ef445b26",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"todo-web-api",
+								"notes-api",
+								"notes",
+								"getActualNote"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"id\": 2,\n    \"prev_note_version_id\": 1,\n    \"guid\": \"not guid2\",\n    \"version\": 1,\n    \"title\": \"note title2\",\n    \"text\": \"note text2\",\n    \"user_id\": 1,\n    \"create_date\": \"2022-05-03T21:39:07Z\",\n    \"deleted\": false,\n    \"archive\": false,\n    \"actual\": true,\n    \"note_files\": null\n}"
+				},
+				{
+					"name": "Note 3",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "guid",
+									"value": "not guid3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://4346340c-b680-413b-b41d-2680ef445b26.mock.pstmn.io/todo-web-api/notes-api/notes/getActualNote",
+							"protocol": "https",
+							"host": [
+								"4346340c-b680-413b-b41d-2680ef445b26",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"todo-web-api",
+								"notes-api",
+								"notes",
+								"getActualNote"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"id\": 2,\n    \"prev_note_version_id\": 1,\n    \"guid\": \"not guid3\",\n    \"version\": 1,\n    \"title\": \"note title3\",\n    \"text\": \"note text3\",\n    \"user_id\": 1,\n    \"create_date\": \"2022-05-03T21:39:07Z\",\n    \"deleted\": false,\n    \"archive\": false,\n    \"actual\": true,\n    \"note_files\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "todo-web-api/notes-api/notes/getLastUserNoteMainInfo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/todo-web-api/notes-api/notes/getLastUserNoteMainInfo",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"todo-web-api",
+						"notes-api",
+						"notes",
+						"getLastUserNoteMainInfo"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://4346340c-b680-413b-b41d-2680ef445b26.mock.pstmn.io/todo-web-api/notes-api/notes/getLastUserNoteMainInfo",
+							"protocol": "https",
+							"host": [
+								"4346340c-b680-413b-b41d-2680ef445b26",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"todo-web-api",
+								"notes-api",
+								"notes",
+								"getLastUserNoteMainInfo"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 2,\n        \"guid\": \"not guid1\",\n        \"version\": 1,\n        \"title\": \"Title заметки 1\",\n        \"user_id\": 1,\n        \"create_date\": \"2022-05-03T21:39:07Z\",\n        \"actual\": true\n    },\n    {\n        \"id\": 3,\n        \"guid\": \"not guid2\",\n        \"version\": 1,\n        \"title\": \"Title заметки 2\",\n        \"user_id\": 1,\n        \"create_date\": \"2022-05-03T21:39:07Z\",\n        \"actual\": true\n    },\n    {\n        \"id\": 4,\n        \"guid\": \"not guid3\",\n        \"version\": 1,\n        \"title\": \"Title заметки 3\",\n        \"user_id\": 1,\n        \"create_date\": \"2022-05-03T21:39:07Z\",\n        \"actual\": true\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "todo-web-api/notes-api/notes/saveNote",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Access-Token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlcl9pZCI6MSwicHJpdmlsZWdlcyI6WyJWSUVXX05PVEVfVkVSU0lPTl9ISVNUT1JZIiwiQ0hBTkdFX05PVEVfVkVSU0lPTiIsIkNSRUFURV9OT1RFIl0sImV4cCI6MTY0ODMzMDMzN30.ag_BvkObrrOX8NbAaxM2J3QQ66N6kRjfDCAoCaQMjVI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 2,\r\n    \"prev_note_version_id\": 1,\r\n    \"guid\": \"not guid1\",\r\n    \"version\": 1,\r\n    \"title\": \"note title1\",\r\n    \"text\": \"note text1\",\r\n    \"user_id\": 1,\r\n    \"create_date\": \"2022-05-03T21:39:07Z\",\r\n    \"deleted\": false,\r\n    \"archive\": false,\r\n    \"actual\": true,\r\n    \"note_files\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/todo-web-api/notes-api/notes/saveNote",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"todo-web-api",
+						"notes-api",
+						"notes",
+						"saveNote"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "todo-web-api/notes-api/notes/saveNote",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Access-Token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlcl9pZCI6MSwicHJpdmlsZWdlcyI6WyJWSUVXX05PVEVfVkVSU0lPTl9ISVNUT1JZIiwiQ0hBTkdFX05PVEVfVkVSU0lPTiIsIkNSRUFURV9OT1RFIl0sImV4cCI6MTY0ODMzMDMzN30.ag_BvkObrrOX8NbAaxM2J3QQ66N6kRjfDCAoCaQMjVI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"prev_note_version_id\": 1,\r\n    \"guid\": \"not guid1\",\r\n    \"version\": 1,\r\n    \"title\": \"note title1\",\r\n    \"text\": \"note text1\",\r\n    \"user_id\": 1,\r\n    \"create_date\": \"2022-05-03T21:39:07Z\",\r\n    \"deleted\": false,\r\n    \"archive\": false,\r\n    \"actual\": true,\r\n    \"note_files\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/todo-web-api/notes-api/notes/saveNote",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"todo-web-api",
+								"notes-api",
+								"notes",
+								"saveNote"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"result\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "users-api/users/getUserData",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Access-Token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlcl9pZCI6MSwicHJpdmlsZWdlcyI6WyJWSUVXX05PVEVfVkVSU0lPTl9ISVNUT1JZIiwiQ0hBTkdFX05PVEVfVkVSU0lPTiIsIkNSRUFURV9OT1RFIl0sImV4cCI6MTY0ODMzMDMzN30.ag_BvkObrrOX8NbAaxM2J3QQ66N6kRjfDCAoCaQMjVI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 2,\r\n    \"prev_note_version_id\": 1,\r\n    \"guid\": \"not guid1\",\r\n    \"version\": 1,\r\n    \"title\": \"note title1\",\r\n    \"text\": \"note text1\",\r\n    \"user_id\": 1,\r\n    \"create_date\": \"2022-05-03T21:39:07Z\",\r\n    \"deleted\": false,\r\n    \"archive\": false,\r\n    \"actual\": true,\r\n    \"note_files\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/users-api/users/getUserData",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users-api",
+						"users",
+						"getUserData"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "users-api/users/getUserData",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Access-Token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlcl9pZCI6MSwicHJpdmlsZWdlcyI6WyJWSUVXX05PVEVfVkVSU0lPTl9ISVNUT1JZIiwiQ0hBTkdFX05PVEVfVkVSU0lPTiIsIkNSRUFURV9OT1RFIl0sImV4cCI6MTY0ODMzMDMzN30.ag_BvkObrrOX8NbAaxM2J3QQ66N6kRjfDCAoCaQMjVI",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users-api/users/getUserData",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users-api",
+								"users",
+								"getUserData"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"user_id\": 1,\n    \"privilege_codes\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "notes-api/notes/getUserNotes",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Access-Token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlcl9pZCI6MSwicHJpdmlsZWdlcyI6WyJWSUVXX05PVEVfVkVSU0lPTl9ISVNUT1JZIiwiQ0hBTkdFX05PVEVfVkVSU0lPTiIsIkNSRUFURV9OT1RFIl0sImV4cCI6MTY0ODMzMDMzN30.ag_BvkObrrOX8NbAaxM2J3QQ66N6kRjfDCAoCaQMjVI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "user_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/notes-api/notes/getUserNotes",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"notes-api",
+						"notes",
+						"getUserNotes"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "notes-api/notes/getUserNotes",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Access-Token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlcl9pZCI6MSwicHJpdmlsZWdlcyI6WyJWSUVXX05PVEVfVkVSU0lPTl9ISVNUT1JZIiwiQ0hBTkdFX05PVEVfVkVSU0lPTiIsIkNSRUFURV9OT1RFIl0sImV4cCI6MTY0ODMzMDMzN30.ag_BvkObrrOX8NbAaxM2J3QQ66N6kRjfDCAoCaQMjVI",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/notes-api/notes/getUserNotes",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"notes-api",
+								"notes",
+								"getUserNotes"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 2,\n        \"prev_note_version_id\": 1,\n        \"guid\": \"not guid1\",\n        \"version\": 1,\n        \"title\": \"Title заметки 1\",\n        \"text\": \"Text заметки 1\",\n        \"user_id\": 1,\n        \"create_date\": \"2022-05-03T21:39:07Z\",\n        \"deleted\": false,\n        \"archive\": false,\n        \"actual\": true,\n        \"note_files\": [\n            {\n                \"id\": 1,\n                \"note_id\": 2,\n                \"guid\": \"testGuid\",\n                \"data\": null,\n                \"filename\": \"filename\"\n            }\n        ]\n    },\n    {\n        \"id\": 3,\n        \"prev_note_version_id\": null,\n        \"guid\": \"not guid2\",\n        \"version\": 1,\n        \"title\": \"Title заметки 2\",\n        \"text\": \"Text заметки 2\",\n        \"user_id\": 1,\n        \"create_date\": \"2022-05-03T21:39:07Z\",\n        \"deleted\": false,\n        \"archive\": false,\n        \"actual\": true,\n        \"note_files\": [\n            {\n                \"id\": 1,\n                \"note_id\": 3,\n                \"guid\": \"testGuid\",\n                \"data\": null,\n                \"filename\": \"filename\"\n            }\n        ]\n    },\n    {\n        \"id\": 4,\n        \"prev_note_version_id\": null,\n        \"guid\": \"not guid3\",\n        \"version\": 1,\n        \"title\": \"Title заметки 3\",\n        \"text\": \"Text заметки 3\",\n        \"user_id\": 1,\n        \"create_date\": \"2022-05-03T21:39:07Z\",\n        \"deleted\": false,\n        \"archive\": false,\n        \"actual\": true,\n        \"note_files\": [\n            {\n                \"id\": 1,\n                \"note_id\": 4,\n                \"guid\": \"testGuid\",\n                \"data\": null,\n                \"filename\": \"filename\"\n            }\n        ]\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "/todo-web-api/graphql",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Access-Token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlcl9pZCI6MSwicHJpdmlsZWdlcyI6WyJWSUVXX05PVEVfVkVSU0lPTl9ISVNUT1JZIiwiQ0hBTkdFX05PVEVfVkVSU0lPTiIsIkNSRUFURV9OT1RFIl0sImV4cCI6MTY1NzY0NjI1MH0.rOORp9Tozjj1yPx3VMRZZadkTpi1W4DicpfLQyhJRuw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query Query($userId: ID){\r\n    userNotes(userId: $userId){\r\n        id\r\n        prev_note_version_id\r\n        guid\r\n        version\r\n        title\r\n        text\r\n        user {\r\n            user_id\r\n        }\r\n        create_date\r\n        deleted\r\n        archive\r\n        actual\r\n        note_files {\r\n            id\r\n            note_id\r\n            guid\r\n            data\r\n            filename\r\n        }\r\n    }\r\n}",
+						"variables": "{\r\n    \"userId\": 1\r\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/todo-web-api/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"todo-web-api",
+						"graphql"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/todo-web-api/graphql",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Access-Token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwidXNlcl9pZCI6MSwicHJpdmlsZWdlcyI6WyJWSUVXX05PVEVfVkVSU0lPTl9ISVNUT1JZIiwiQ0hBTkdFX05PVEVfVkVSU0lPTiIsIkNSRUFURV9OT1RFIl0sImV4cCI6MTY1NzY0NjI1MH0.rOORp9Tozjj1yPx3VMRZZadkTpi1W4DicpfLQyhJRuw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query Query($userId: ID){\r\n    userNotes(userId: $userId){\r\n        id\r\n        prev_note_version_id\r\n        guid\r\n        version\r\n        title\r\n        text\r\n        user {\r\n            user_id\r\n        }\r\n        create_date\r\n        deleted\r\n        archive\r\n        actual\r\n        note_files {\r\n            id\r\n            note_id\r\n            guid\r\n            data\r\n            filename\r\n        }\r\n    }\r\n}",
+								"variables": "{\r\n    \"userId\": 1\r\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}/todo-web-api/graphql",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"todo-web-api",
+								"graphql"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"userNotes\": [\n            {\n                \"id\": \"6\",\n                \"prev_note_version_id\": 5,\n                \"guid\": \"not guid1\",\n                \"version\": \"3\",\n                \"title\": \"note title1_2s\",\n                \"text\": \"note text1_2s\",\n                \"user\": {\n                    \"user_id\": \"1\"\n                },\n                \"create_date\": \"Mon Jun 27 16:15:44 UTC 2022\",\n                \"deleted\": \"false\",\n                \"archive\": \"false\",\n                \"actual\": \"true\",\n                \"note_files\": [\n                    {\n                        \"id\": \"1\",\n                        \"note_id\": 6,\n                        \"guid\": \"72a6ff9c-5551-47cb-8498-f27a5a664b8a\",\n                        \"data\": null,\n                        \"filename\": \".gitconfig\"\n                    }\n                ]\n            }\n        ]\n    }\n}"
+				}
+			]
+		}
+	]
+}
