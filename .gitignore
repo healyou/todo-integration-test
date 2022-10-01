@@ -2,7 +2,7 @@
 .pytest_cache/
 .idea/
 db/redis/data
-log/**/*.log**
+docker/log/**/*.log**
 webdriver/chromedriver.exe
 docker/volumes/**
 !docker/volumes/readme.txt

@@ -10,8 +10,10 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=users
-#    ports:
-#      - 5432:5432
+    ports:
+      - 5432:5432
+    volumes:
+      - ./docker/volumes/postgres-data:/var/lib/postgresql/data
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 10s
@@ -33,8 +35,10 @@ services:
       - PGADMIN_DEFAULT_EMAIL=postgres@pgadmin.org
       - PGADMIN_DEFAULT_PASSWORD=postgres
       - PGADMIN_LISTEN_PORT=80
-#    ports:
-#      - 8089:80
+    ports:
+      - 8089:80
+    volumes:
+      - ./docker/volumes/pgadmin-data:/var/lib/pgadmin
     depends_on:
       postgres-db:
         condition: service_healthy
@@ -44,12 +48,12 @@ services:
   users-app:
     image: users-app:v1
     container_name: users-app
-#    ports:
-#      - 8082:8082
+    ports:
+      - 8082:8082
     environment:
       - spring.profiles.active=docker
     volumes:
-      - ./log:/var/log/users-service
+      - ./docker/log:/var/log/users-service
 #    healthcheck:
 #      test: "curl --fail --silent localhost:8082/actuator/health | grep UP || exit 1"
 #      interval: 10s
@@ -67,8 +71,10 @@ services:
     image: redis:6.2.6-alpine
     container_name: auth-redis-db
     command: redis-server --appendonly yes --appendfsync everysec --requirepass redis
-#    ports:
-#      - 6379:6379
+    ports:
+      - 6379:6379
+    volumes:
+      - ./docker/volumes/redis:/data
     healthcheck:
       test: [ "CMD", "redis-cli","-a","redis","ping" ]
       interval: 1s
@@ -86,8 +92,8 @@ services:
       - REDIS_DB=0
       - HTTP_USER=redis
       - HTTP_PASSWORD=redis
-#    ports:
-#      - 8081:8081
+    ports:
+      - 8081:8081
     depends_on:
       redis:
         condition: service_healthy
@@ -98,23 +104,23 @@ services:
     container_name: auth-app
     environment:
       ENV: PROD
-#    ports:
-#      - 8887:8887
+    ports:
+      - 8887:8887
     volumes:
-      - ./log:/usr/src/app/log
+      - ./docker/log:/usr/src/app/log
     depends_on:
       redis:
         condition: service_healthy
 
   # go todo_app
   mysql:
-    image: mysql:8.0.27
+    image: todo-app-mysql:latest
     container_name: mysql
     command: --default-authentication-plugin=mysql_native_password
-#    ports:
-#      - "3306:3306"
+    ports:
+      - "3306:3306"
     volumes:
-      - ./docker/mysql-initdb-d:/docker-entrypoint-initdb.d
+      - ./docker/volumes/mysql-data:/var/lib/mysql
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: "yes"
       MYSQL_USER: "mysql"
@@ -122,8 +128,10 @@ services:
       MYSQL_DATABASE: "todo"
     healthcheck:
       test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost", '-u', 'mysql', '-pmysql']
+      interval: 45s
       timeout: 10s
-      retries: 6
+      retries: 10
+      start_period: 300s
 
   flyway:
     image: todo-app-flyway:latest
@@ -141,8 +149,8 @@ services:
   nginx-basic-auth:
     container_name: nginx-basic-auth
     image: beevelop/nginx-basic-auth:v2021.02.1
-#    ports:
-#      - "8111:80"
+    ports:
+      - "8111:80"
     environment:
       # apr1 hash - $$ (экранирование знака $)
       HTPASSWD: admin:$$apr1$$K3hIHvp9$$CGnOCuffpwYynXXLaB8Fm/
@@ -169,9 +177,11 @@ services:
     image: minio/minio:RELEASE.2022-01-27T03-53-02Z
     container_name: minio
     command: "server /data --console-address ':9001'"
-#    ports:
-#      - "9000:9000"
-#      - "9001:9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - ./docker/volumes/minio:/data
     environment:
       MINIO_ROOT_USER: "minio"
       MINIO_ROOT_PASSWORD: "miniopsw"
@@ -198,7 +208,7 @@ services:
     image: todo-app:latest
     container_name: todo-app
     volumes:
-      - ./log:/src/log
+      - ./docker/log:/src/log
     environment:
       APP_PROFILE_ACTIVE: "PROD"
       MINIO_ENDPOINT: "minio:9000"
@@ -207,8 +217,8 @@ services:
       MY_SQL_DRIVER_NAME: "mysql"
       MY_SQL_DATASOURCE_URL: "mysql:mysql@tcp(mysql:3306)/todo?parseTime=true"
       LOG_FILE_PATH_WITH_NAME: "/src/log/todo_app.log"
-#    ports:
-#      - "8222:8222"
+    ports:
+      - "8222:8222"
     depends_on:
       mysql:
         condition: service_healthy
@@ -221,18 +231,18 @@ services:
   todo-graphql-app:
     image: todo-graphql-app:v1
     container_name: todo-graphql-app
-#    ports:
-#      - "8333:8333"
+    ports:
+      - "8333:8333"
     environment:
       - spring.profiles.active=prod
     volumes:
-      - ./log:/var/log/todo-graphql-service
+      - ./docker/log:/var/log/todo-graphql-service
     healthcheck:
       test: "curl --fail --silent localhost:8333/actuator/health | grep UP || exit 1"
-      interval: 10s
-      timeout: 5s
+      interval: 20s
+      timeout: 10s
       retries: 15
-      start_period: 15s
+      start_period: 60s
     depends_on:
       todo-app:
         condition: service_started
@@ -249,13 +259,13 @@ services:
       - spring.profiles.active=prod
       - SPRING_APPLICATION_JSON={"spring":{"cloud":{"gateway":{"globalcors":{"corsConfigurations":{"'[/**]'":{"allowedOrigins":"http://localhost"}}}}}}}
     volumes:
-      - ./log:/var/log/gateway-service
+      - ./docker/log:/var/log/gateway-service
     healthcheck:
       test: "curl --fail --silent localhost:8080/actuator/health | grep UP || exit 1"
-      interval: 10s
-      timeout: 5s
+      interval: 20s
+      timeout: 10s
       retries: 15
-      start_period: 15s
+      start_period: 120s
     depends_on:
       todo-app:
         condition: service_started
@@ -274,6 +284,7 @@ services:
       - "80:80"
     healthcheck:
       test: [ "CMD", "service", "nginx", "status" ]
+      start_period: 120s
     depends_on:
       gateway-app:
         condition: service_healthy
